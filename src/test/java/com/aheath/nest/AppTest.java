@@ -1,4 +1,4 @@
-package com.aheath.nest_sensor_main;
+package com.aheath.nest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
