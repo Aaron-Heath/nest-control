@@ -13,8 +13,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import static com.aheath.nest.config.TraitsConstants.AMBIENT_TEMP;
-import static com.aheath.nest.config.TraitsConstants.TEMP_SETPOINT;
+import static com.aheath.nest.config.TraitsConstants.*;
 
 public class TraitsDeserializer extends JsonDeserializer<Map<String, ThermostatTrait>> {
 
@@ -40,6 +39,22 @@ public class TraitsDeserializer extends JsonDeserializer<Map<String, ThermostatT
                     break;
                 case AMBIENT_TEMP:
                     trait = mapper.treeToValue(value, ThermostatTrait.AmbientTemperatureCelsius.class);
+                    break;
+                case THERMOSTAT_MODE:
+                    trait = mapper.treeToValue(value, ThermostatTrait.ThermostatMode.class);
+                    break;
+                case THERMOSTAT_HVAC:
+                    trait = mapper.treeToValue(value, ThermostatTrait.ThermostatHvac.class);
+                    break;
+                case THERMOSTAT_ECO:
+                    trait = mapper.treeToValue(value, ThermostatTrait.ThermostatEco.class);
+                    break;
+
+                case AMBIENT_HUMIDITY:
+                    trait = mapper.treeToValue(value, ThermostatTrait.AmbientHumidity.class);
+                    break;
+                case CONNECTION_STATUS:
+                    trait = mapper.treeToValue(value, ThermostatTrait.ThermostatConnection.class);
                     break;
             }
         if (trait != null) traits.put(key, trait);
