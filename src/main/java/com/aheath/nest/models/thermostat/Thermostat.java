@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 
+import java.util.Collection;
 import java.util.Map;
 
 @Data
@@ -16,7 +17,7 @@ public class Thermostat {
 
 
     @JsonDeserialize(using = TraitsDeserializer.class)
-    Map<String,ThermostatTrait> traits;
+    Map<String, SdmDeviceTrait> traits;
 
-
+    private Collection<ParentRelation> parentRelations;
 }
