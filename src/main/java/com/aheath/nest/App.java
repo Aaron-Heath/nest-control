@@ -1,5 +1,4 @@
-package com.aheath.nest_sensor_main;
-
+package com.aheath.nest;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
