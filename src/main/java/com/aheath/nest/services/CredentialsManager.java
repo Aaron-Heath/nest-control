@@ -15,6 +15,7 @@ import org.springframework.web.util.UriBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Component
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CredentialsManager {
@@ -25,8 +26,10 @@ public class CredentialsManager {
     private String refreshToken;
     private String clientSecret;
     private String clientId;
+    private String deviceId;
     private String authUrl;
     private String tokenPath;
+    private String projectId;
 
     @Autowired
     private RestClient restClient;
@@ -36,7 +39,7 @@ public class CredentialsManager {
         authenticate();
     }
 
-    private void authenticate() {
+    public void authenticate() {
         logger.info("Authenticating");
         RefreshTokenResponse tokenResponse = restClient.post()
                 .uri(UriComponentsBuilder.newInstance()
@@ -70,8 +73,11 @@ public class CredentialsManager {
         private String refreshToken;
         private String clientSecret;
         private String clientId;
+        private String deviceId;
         private String authUrl;
         private String tokenPath;
+        private String projectId;
+
         @Autowired
         private RestClient restClient;
 
@@ -95,6 +101,11 @@ public class CredentialsManager {
             return this;
         }
 
+        public CredentialsManagerBuilder deviceId(String deviceId) {
+            this.deviceId = deviceId;
+            return this;
+        }
+
         public CredentialsManagerBuilder authUrl(String authUrl) {
             this.authUrl = authUrl;
             return this;
@@ -110,14 +121,21 @@ public class CredentialsManager {
             return this;
         }
 
+        public  CredentialsManagerBuilder projectId(String projectId) {
+            this.projectId = projectId;
+            return this;
+        }
+
         public CredentialsManager build() {
             return new CredentialsManager(
                     this.accessToken,
                     this.refreshToken,
                     this.clientSecret,
                     this.clientId,
+                    this.deviceId,
                     this.authUrl,
                     this.tokenPath,
+                    this.projectId,
                     this.restClient
             );
         }

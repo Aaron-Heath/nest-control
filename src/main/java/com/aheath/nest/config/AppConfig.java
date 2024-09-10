@@ -1,10 +1,10 @@
 package com.aheath.nest.config;
 
+import com.aheath.nest.interceptors.SdmApiInterceptor;
 import com.aheath.nest.services.CredentialsManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestClient;
 
 
@@ -16,8 +16,6 @@ public class AppConfig {
     @Value("${project.id}")
     private String projectId;
 
-    @Value("${access.token}")
-    private String accessToken;
 
     @Value("${refresh.token}")
     private String refreshToken;
@@ -31,52 +29,31 @@ public class AppConfig {
     @Value("${device.id}")
     private String deviceId;
 
+    @Bean SdmApiInterceptor sdmApiInterceptor() {
+        return new SdmApiInterceptor();
+    }
+
     @Bean
     RestClient restClient() {
-        return RestClient.create();
+        return RestClient.builder()
+                .requestInterceptor(sdmApiInterceptor())
+                .build();
     }
 
     @Bean
     CredentialsManager credentialsManager() {
-        return new CredentialsManager.CredentialsManagerBuilder()
+        CredentialsManager credentialsManager = new CredentialsManager.CredentialsManagerBuilder()
                 .clientId(clientId)
                 .authUrl(AUTH_URL)
                 .clientSecret(clientSecret)
+                .deviceId(deviceId)
                 .refreshToken(refreshToken)
                 .restClient(restClient())
                 .tokenPath("/oauth2/v4/token")
+                .projectId(projectId)
                 .build();
+        sdmApiInterceptor().setCredentialsManager(credentialsManager);
+        return credentialsManager;
     }
 
-//    @Bean
-//    HttpClient httpClient() {
-//        HttpConfig httpConfig = HttpConfig.newBuilder()
-//                .setConnectTimeoutSeconds(10)
-//                .setMaxRetries(4)
-//                .build();
-//
-//        HttpClient httpClient = new ApacheHttpClient(httpConfig);
-//
-//        return httpClient;
-//    }
-//
-//
-//    private String refreshAccessToken() {
-//        HttpRequest request = HttpRequest.newBuilder()
-//                .setMethod(HttpRequest.Method.POST)
-//                .setUrl(REFRESH_URL)
-//                .setQueryParam("client_id").to(clientId)
-//                .setQueryParam("client_secret").to(clientSecret)
-//                .setQueryParam("refresh_token").to(refreshToken)
-//                .setQueryParam("grant_type").to("refresh_token")
-//                .build();
-//
-//        HttpClient httpClient = httpClient();
-//
-//        RefreshTokenResponse response = httpClient.execute(request).getAs(RefreshTokenResponse.class);
-//
-//        this.accessToken = response.getAccessToken();
-//
-//        return accessToken;
-//    }
 }
