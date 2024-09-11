@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ThermostatCommand {
-    private String command;
-    private ThermostatCommandParam params;
+public class SetHeatCoolParams implements ThermostatCommandParam{
+    private double heatCelsius;
+    private double coolCelsius;
+
 }

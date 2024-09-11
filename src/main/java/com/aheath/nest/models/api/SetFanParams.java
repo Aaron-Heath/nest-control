@@ -5,9 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class ThermostatCommand {
-    private String command;
-    private ThermostatCommandParam params;
+@AllArgsConstructor
+public class SetFanParams implements ThermostatCommandParam {
+    private String timerMode;
+    private String duration;
 }

@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import static com.aheath.nest.config.TraitsConstants.*;
+import static com.aheath.nest.models.thermostat.TraitsConstants.*;
 
 public class TraitsDeserializer extends JsonDeserializer<Map<String, SdmDeviceTrait>> {
 

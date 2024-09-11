@@ -1,4 +1,4 @@
-package com.aheath.nest.config;
+package com.aheath.nest.models.thermostat;
 
 public class TraitsConstants {
 

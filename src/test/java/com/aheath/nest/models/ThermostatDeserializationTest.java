@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.aheath.nest.config.TraitsConstants.*;
+import static com.aheath.nest.models.thermostat.TraitsConstants.*;
 
 public class ThermostatDeserializationTest {
 

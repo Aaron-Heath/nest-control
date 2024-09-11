@@ -8,8 +8,8 @@ import lombok.Data;
 import java.util.Collection;
 import java.util.Map;
 
-import static com.aheath.nest.config.TraitsConstants.AMBIENT_TEMP;
-import static com.aheath.nest.config.TraitsConstants.TEMP_SETPOINT;
+import static com.aheath.nest.models.thermostat.TraitsConstants.AMBIENT_TEMP;
+import static com.aheath.nest.models.thermostat.TraitsConstants.TEMP_SETPOINT;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)

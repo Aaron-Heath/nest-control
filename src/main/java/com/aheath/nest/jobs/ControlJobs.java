@@ -1,6 +1,7 @@
 package com.aheath.nest.jobs;
 
 import com.aheath.nest.models.thermostat.Thermostat;
+import com.aheath.nest.services.SensorService;
 import com.aheath.nest.services.ThermostatService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,16 +14,21 @@ public class ControlJobs {
     private final Logger logger = LoggerFactory.getLogger(ControlJobs.class);
 
     private ThermostatService thermostatService;
+    private SensorService sensorService;
 
     @Autowired
-    public ControlJobs(ThermostatService thermostatService) {
+    public ControlJobs(ThermostatService thermostatService, SensorService sensorService) {
         this.thermostatService = thermostatService;
+        this.sensorService = sensorService;
     }
 
 
     @Scheduled(cron = "*/60 * * * * *")
-    void testJob() throws InterruptedException {
+    void update() throws InterruptedException {
         Thermostat thermostatState = thermostatService.getThermostatState();
+        logger.info("Setting fan");
+        thermostatService.activateFan("3600s");
+
     }
 
 

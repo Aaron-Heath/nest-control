@@ -1,6 +1,8 @@
 package com.aheath.nest.services;
 
+import com.aheath.nest.models.api.SetFanParams;
 import com.aheath.nest.models.api.ThermostatCommand;
+import com.aheath.nest.models.api.ThermostatCommandBuilder;
 import com.aheath.nest.models.thermostat.Thermostat;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -11,6 +13,8 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import static com.aheath.nest.models.api.ThermostatCommandConstants.SET_FANTIMER;
 
 
 @Service
@@ -42,13 +46,28 @@ public class ThermostatService {
         return thermostat;
     }
 
+    public void executeCommand(ThermostatCommand command) {
+        restClient.post()
+                .uri(UriComponentsBuilder.newInstance()
+                        .scheme("https")
+                        .host(SDM_HOST)
+                        .path("v1/enterprises/" + credentialsManager.getProjectId() + "/devices/" + credentialsManager.getDeviceId() + ":executeCommand")
+                        .build().toUriString())
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(command)
+                .retrieve()
+                .onStatus(status -> status.value() != 200, (request, response) -> {
+                    logger.warn("Something went wrong. Command not executed.");
+                });
+
+    }
+
     public void activateFan(String duration) {
-        ThermostatCommand command = new ThermostatCommand();
-        command.setCommand("sdm.devices.commands.Fan.SetTimer");
-        command.setParams(new ThermostatCommand.CommandParams(
-                "ON",
-                duration
-        ));
+        ThermostatCommand command = new ThermostatCommandBuilder()
+                .as(SET_FANTIMER)
+                .withDuration(duration)
+                .withTimerMode("ON")
+                .build();
 
         restClient.post()
                 .uri(UriComponentsBuilder.newInstance()
