@@ -1,4 +1,4 @@
-package com.aheath.nest.models.authResponses;
+package com.aheath.nest.models.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

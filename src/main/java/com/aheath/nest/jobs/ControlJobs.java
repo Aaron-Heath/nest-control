@@ -20,10 +20,9 @@ public class ControlJobs {
     }
 
 
-    @Scheduled(cron = "*/30 * * * * *")
+    @Scheduled(cron = "*/60 * * * * *")
     void testJob() throws InterruptedException {
         Thermostat thermostatState = thermostatService.getThermostatState();
-        System.out.println(thermostatState.getAmbientTemperature());
     }
 
 
