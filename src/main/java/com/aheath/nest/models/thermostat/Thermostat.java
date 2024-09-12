@@ -24,14 +24,18 @@ public class Thermostat {
     private Collection<ParentRelation> parentRelations;
 
 
-    public double getAmbientTemperature() {
+    public double getActualTempC() {
         AmbientTemperatureCelsius ambientTemperature = (AmbientTemperatureCelsius) traits.get(AMBIENT_TEMP);
         return ambientTemperature.getAmbientTemperatureCelsius();
     }
 
-    public TemperatureSetPoint getSetTemperature() {
-        TemperatureSetPoint temperatureSetPoint = (TemperatureSetPoint) traits.get(TEMP_SETPOINT);
-        return temperatureSetPoint;
+    public TemperatureSetPoint getTemperatureSetpoint() {
+        return (TemperatureSetPoint) traits.get(TEMP_SETPOINT);
+    }
+
+    public String getMode() {
+        ThermostatMode thermostatMode = (ThermostatMode) traits.get(THERMOSTAT_MODE);
+        return thermostatMode.getMode();
     }
 
     /**
