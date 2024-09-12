@@ -7,7 +7,7 @@ public class SensorService {
 
     public double getSensorTemperature() {
         // Temporary placeholder value
-        return 72.33;
+        return 22.222;
     }
 
 }
