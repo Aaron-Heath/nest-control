@@ -23,11 +23,21 @@ public class ControlJobs {
     }
 
 
-    @Scheduled(cron = "*/60 * * * * *")
+    @Scheduled(cron = "*/10 * * * * *")
     void update() throws InterruptedException {
         Thermostat thermostatState = thermostatService.getThermostatState();
-        logger.info("Setting fan");
-        thermostatService.activateFan("3600s");
+        if(!thermostatState.isFanOn()) {
+            logger.info("Setting fan");
+            thermostatService.activateFan("3600s");
+        }
+
+        logger.info("fan is already on");
+
+    }
+
+    @Scheduled(cron = "0 0/30 * * * *")
+    void logCurrentState() throws  InterruptedException {
+
 
     }
 

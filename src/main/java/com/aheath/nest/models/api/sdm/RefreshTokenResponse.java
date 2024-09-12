@@ -1,4 +1,4 @@
-package com.aheath.nest.models.api;
+package com.aheath.nest.models.api.sdm;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package com.aheath.nest.services;
 
-import com.aheath.nest.models.api.RefreshTokenResponse;
+import com.aheath.nest.models.api.sdm.RefreshTokenResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;

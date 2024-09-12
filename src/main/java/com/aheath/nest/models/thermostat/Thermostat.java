@@ -8,8 +8,7 @@ import lombok.Data;
 import java.util.Collection;
 import java.util.Map;
 
-import static com.aheath.nest.models.thermostat.TraitsConstants.AMBIENT_TEMP;
-import static com.aheath.nest.models.thermostat.TraitsConstants.TEMP_SETPOINT;
+import static com.aheath.nest.models.thermostat.TraitsConstants.*;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -30,8 +29,21 @@ public class Thermostat {
         return ambientTemperature.getAmbientTemperatureCelsius();
     }
 
-    public TemperatureSetPoint getSetTempterature() {
+    public TemperatureSetPoint getSetTemperature() {
         TemperatureSetPoint temperatureSetPoint = (TemperatureSetPoint) traits.get(TEMP_SETPOINT);
         return temperatureSetPoint;
+    }
+
+    /**
+     * @return String of "COOLING", "HEATING", or "OFF"
+     */
+    public String getHvacStatus() {
+        ThermostatHvac thermostatHvac = (ThermostatHvac) traits.get(THERMOSTAT_HVAC);
+        return thermostatHvac.getStatus();
+    }
+
+    public boolean isFanOn() {
+        ThermostatFan fanState = (ThermostatFan) traits.get(THERMOSTAT_FAN);
+        return fanState.getTimerMode().equals("ON");
     }
 }

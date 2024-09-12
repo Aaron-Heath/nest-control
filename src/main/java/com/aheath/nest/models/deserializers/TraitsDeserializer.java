@@ -49,12 +49,14 @@ public class TraitsDeserializer extends JsonDeserializer<Map<String, SdmDeviceTr
                 case THERMOSTAT_ECO:
                     trait = mapper.treeToValue(value, ThermostatEco.class);
                     break;
-
                 case AMBIENT_HUMIDITY:
                     trait = mapper.treeToValue(value, AmbientHumidity.class);
                     break;
                 case CONNECTION_STATUS:
                     trait = mapper.treeToValue(value, ThermostatConnection.class);
+                    break;
+                case THERMOSTAT_FAN:
+                    trait = mapper.treeToValue(value, ThermostatFan.class);
                     break;
             }
         if (trait != null) traits.put(key, trait);

@@ -10,4 +10,5 @@ public class TraitsConstants {
     public static final String THERMOSTAT_HVAC = "sdm.devices.traits.ThermostatHvac";
     public static final String THERMOSTAT_ECO = "sdm.devices.traits.ThermostatEco";
     public static final String CONNECTION_STATUS = "sdm.devices.traits.Connectivity";
+    public static final String THERMOSTAT_FAN = "sdm.devices.traits.Fan";
 }
