@@ -62,6 +62,27 @@
 			<artifactId>jackson-core</artifactId>
 			<version>2.18.0-rc1</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+			<version>2.18.0-rc1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-csv -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-csv</artifactId>
+			<version>1.11.0</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/com.hubspot/HorizonApache -->
+		<dependency>
+			<groupId>com.hubspot</groupId>
+			<artifactId>HorizonApache</artifactId>
+			<version>0.3.0</version>
+		</dependency>
+
 
 
 		<dependency>
